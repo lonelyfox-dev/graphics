@@ -210,6 +210,11 @@ def submit(text):
 
     if stdin.lower() == 'reset':
         basis_w = deepcopy(basis)
+    elif len(stdin.split(' ')) == 2:
+        assert stdin.split(' ')[0] == 'mirror', 'Unknown command'
+        
+        action, axis = stdin.lower().split(' ')
+        basis_w = funcs[action][axis](basis_w)
     else:
         action, axis, value = stdin.lower().split(' ')
         basis_w = funcs[action][axis](basis_w, float(value))
